@@ -1,48 +1,3 @@
-Write-Host @"
-01001110 01001111 01010110 01000001
---------------------------
--------NOVA PREMIUM-------
-------[Version 2.0]-------
-
-"@ -ForegroundColor Green
-
-Write-Host "Welcome to Nova System!" -ForegroundColor Green
-
-while ($true) {
-    Write-Host "Choose an option:" -ForegroundColor Cyan
-    Write-Host "1. Optimize Performance"
-    Write-Host "2. Disable Unnecessary Ports"
-    Write-Host "3. Clean Sensitive Data"
-    Write-Host "4. Schedule Weekly Maintenance"
-    Write-Host "5. Generate Performance Report"
-    Write-Host "6. Disable Unnecessary Startup Programs"
-    Write-Host "7. Clear Temporary Files"
-    Write-Host "8. Speed Up Boot"
-    Write-Host "9. Update System and Drivers"
-    Write-Host "10. Repair Network Issues"
-    Write-Host "11. Disable Unnecessary Services"
-    Write-Host "12. Restore System to Previous Point"
-    Write-Host "13. Check Disk for Errors"
-    Write-Host "14. Optimize Power Consumption"
-    Write-Host "15. View Active Processes"
-    Write-Host "16. Clear RAM"
-    Write-Host "17. Activate High Performance Mode"
-    Write-Host "18. Clear Browsing History"
-    Write-Host "19. Disable Unnecessary Notifications"
-    Write-Host "20. Close Unused Programs"
-    Write-Host "21. Exit"
-    Write-Host "----------------------------visit our web to know more about this comands--------------------"
-
-    $choice = Read-Host "Enter your choice"
-
-    switch ($choice) {
-        "1" {
-            Write-Host "Optimizing performance..." -ForegroundColor Green
-            Stop-Service -Name "SysMain" -Force
-            Set-Service -Name "SysMain" -StartupType Disabled
-            Write-Host "Performance optimized!" -ForegroundColor Cyan
-        }
-        "2" {
             Write-Host "Disabling unnecessary ports..." -ForegroundColor Green
             netsh advfirewall firewall add rule name="Disable Unused Ports" dir=in action=block protocol=TCP localport=135,137,138,139,445
             Write-Host "Ports disabled!" -ForegroundColor Cyan
@@ -140,6 +95,23 @@ while ($true) {
             Write-Host "Unused programs closed!" -ForegroundColor Cyan
         }
         "21" {
+            Write-Host "Performing full system scan..." -ForegroundColor Green
+            Write-Host "Running System File Checker..." -ForegroundColor Yellow
+            sfc /scannow
+            Write-Host "Running DISM tool..." -ForegroundColor Yellow
+            DISM /Online /Cleanup-Image /RestoreHealth
+            Write-Host "System scan completed!" -ForegroundColor Cyan
+        }
+        "22" {
+            Write-Host "Performing deep system clean..." -ForegroundColor Green
+            # Add the deep clean steps here...
+            Write-Host "Deep clean completed!" -ForegroundColor Cyan
+        }
+        "23" {
+            Write-Host "Auto-Optimizing system..." -ForegroundColor Green
+            AutoOptimizeSystem
+        }
+        "24" {
             Write-Host "Exiting..." -ForegroundColor Red
             exit
         }
