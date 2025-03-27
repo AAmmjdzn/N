@@ -1,3 +1,101 @@
+Write-Host @"
+01001110 01001111 01010110 01000001
+--------------------------
+-------NOVA PREMIUM-------
+------[Version 2.0]-------
+
+"@ -ForegroundColor Green
+
+Write-Host "Welcome to Nova System!" -ForegroundColor Green
+
+Function Analyze-UserBehavior {
+    Write-Host "Analyzing user behavior to optimize system..." -ForegroundColor Green
+    $cpuUsage = Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty LoadPercentage
+    $memoryUsage = Get-WmiObject -Class Win32_OperatingSystem | Select-Object -ExpandProperty FreePhysicalMemory
+    $diskUsage = Get-WmiObject -Class Win32_LogicalDisk | Where-Object { $_.DriveType -eq 3 } | Select-Object -ExpandProperty FreeSpace
+
+    if ($cpuUsage -gt 80) {
+        Write-Host "High CPU usage detected. Suggesting optimizations..." -ForegroundColor Yellow
+        return "OptimizePerformance"
+    } elseif ($memoryUsage -lt 200000000) {
+        Write-Host "Low available memory detected. Suggesting memory optimizations..." -ForegroundColor Yellow
+        return "ClearRAM"
+    } elseif ($diskUsage -lt 50000000000) {
+        Write-Host "Low disk space detected. Suggesting disk cleanup..." -ForegroundColor Yellow
+        return "ClearTemporaryFiles"
+    } else {
+        Write-Host "System performance is stable." -ForegroundColor Green
+        return "SystemStable"
+    }
+}
+
+Function AutoOptimizeSystem {
+    $action = Analyze-UserBehavior
+    switch ($action) {
+        "OptimizePerformance" {
+            Write-Host "Optimizing system performance..." -ForegroundColor Green
+            Stop-Service -Name "SysMain" -Force
+            Set-Service -Name "SysMain" -StartupType Disabled
+            Write-Host "System performance optimized!" -ForegroundColor Cyan
+        }
+        "ClearRAM" {
+            Write-Host "Clearing RAM..." -ForegroundColor Green
+            Clear-Content -Path "C:\Windows\Prefetch\*.*" -Force
+            Write-Host "RAM cleared!" -ForegroundColor Cyan
+        }
+        "ClearTemporaryFiles" {
+            Write-Host "Clearing temporary files..." -ForegroundColor Green
+            Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force
+            Remove-Item -Path "$env:LOCALAPPDATA\Temp\*" -Recurse -Force
+            Write-Host "Temporary files cleared!" -ForegroundColor Cyan
+        }
+        "SystemStable" {
+            Write-Host "No action required. System is stable." -ForegroundColor Green
+        }
+        default {
+            Write-Host "Error in analysis. Could not determine optimization steps." -ForegroundColor Red
+        }
+    }
+}
+
+while ($true) {
+    Write-Host "Choose an option:" -ForegroundColor Cyan
+    Write-Host "1. Optimize Performance"
+    Write-Host "2. Disable Unnecessary Ports"
+    Write-Host "3. Clean Sensitive Data"
+    Write-Host "4. Schedule Weekly Maintenance"
+    Write-Host "5. Generate Performance Report"
+    Write-Host "6. Disable Unnecessary Startup Programs"
+    Write-Host "7. Clear Temporary Files"
+    Write-Host "8. Speed Up Boot"
+    Write-Host "9. Update System and Drivers"
+    Write-Host "10. Repair Network Issues"
+    Write-Host "11. Disable Unnecessary Services"
+    Write-Host "12. Restore System to Previous Point"
+    Write-Host "13. Check Disk for Errors"
+    Write-Host "14. Optimize Power Consumption"
+    Write-Host "15. View Active Processes"
+    Write-Host "16. Clear RAM"
+    Write-Host "17. Activate High Performance Mode"
+    Write-Host "18. Clear Browsing History"
+    Write-Host "19. Disable Unnecessary Notifications"
+    Write-Host "20. Close Unused Programs"
+    Write-Host "21. Perform Full System Scan"
+    Write-Host "22. Deep Clean System (Clear Caches, Logs, and Temp Files)"
+    Write-Host "23. Auto Optimize System"
+    Write-Host "24. Exit"
+    Write-Host "----------------------------visit our web to know more about these commands--------------------"
+
+    $choice = Read-Host "Enter your choice"
+
+    switch ($choice) {
+        "1" {
+            Write-Host "Optimizing performance..." -ForegroundColor Green
+            Stop-Service -Name "SysMain" -Force
+            Set-Service -Name "SysMain" -StartupType Disabled
+            Write-Host "Performance optimized!" -ForegroundColor Cyan
+        }
+        "2" {
             Write-Host "Disabling unnecessary ports..." -ForegroundColor Green
             netsh advfirewall firewall add rule name="Disable Unused Ports" dir=in action=block protocol=TCP localport=135,137,138,139,445
             Write-Host "Ports disabled!" -ForegroundColor Cyan
@@ -120,3 +218,4 @@
         }
     }
 }
+
