@@ -1,12 +1,12 @@
 <#
 .SYNOPSIS
-    NOVA - Advanced PC Optimization Tool (31 Commands)
+    NOVA - Advanced PC Optimization Tool (32 Commands)
 #>
 
 function Show-Menu {
     Clear-Host
     Write-Host ""
-    Write-Host "NOVA / - Advanced PC Optimization (31 Commands)" -ForegroundColor Cyan
+    Write-Host "NOVA / - Advanced PC Optimization (32 Commands)" -ForegroundColor Cyan
     Write-Host ""
     
     
